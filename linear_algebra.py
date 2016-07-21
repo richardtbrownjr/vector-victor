@@ -1,8 +1,16 @@
+from math import sqrt
+
 class ShapeError(Exception):
     pass
 
-def shape(vector):
+def compare_shapes(*args):
+    if len(set([shape(arg) for arg in args])) == 1:
+        return shape
+    #else:
+    #if shape(a) != shape(b):
+    #    raise ShapeError
 
+def shape(vector):
     return (len(vector),)
 
 def vector_add(a, b):
@@ -28,8 +36,30 @@ def vector_sub(a, b):
         return [a[index] - b[index] for index, value in enumerate(a)]
 
             #return [a[index] - b[index] for index, value in enumerate(a)]
-def vector_sum(vectors):
-    pass
+
+def vector_sum(*args):
+    if len(set([shape(arg) for arg in args])) == 1:
+        return [sum(args) for args in zip(*args)]
+    else:
+        raise ShapeError
+
+def dot(*args):
+    #compare_shapes(a, b)
+    if len(set([shape(arg) for arg in args])) == 1:
+        return sum([(args) * (args) for args, args in zip(args, args)])
+    else:
+        raise ShapeError
+
+def vector_multiply(a, b):
+    return [x * b for x in (a)]
+
+def vector_mean(*args):
+    #vector_mean(m, n) == [4, 2]
+    return([v/len([x for x in args]) for v in vector_sum(*[x for x in args])])
+
+
+def magnitude(b):
+    return sqrt(sum([a**2 for a in b]))
 
 
 #def compare_shapes(*args):
