@@ -43,10 +43,11 @@ def vector_sum(*args):
     else:
         raise ShapeError
 
-def dot(*args):
+def dot(x, y):
     #compare_shapes(a, b)
-    if len(set([shape(arg) for arg in args])) == 1:
-        return sum([(args) * (args) for args, args in zip(args, args)])
+    if shape(x) == shape(y):
+        return sum([(a) * (b) for a, b in zip(x, y)])
+# <your operation> for x, y in zip(first_argument, second_argument)
     else:
         raise ShapeError
 
@@ -55,7 +56,7 @@ def vector_multiply(a, b):
 
 def vector_mean(*args):
     #vector_mean(m, n) == [4, 2]
-    return([v/len([x for x in args]) for v in vector_sum(*[x for x in args])])
+    return([b/len([x for x in args]) for b in vector_sum(*[x for x in args])])
 
 
 def magnitude(b):
